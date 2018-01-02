@@ -38,6 +38,7 @@ public:
 	int index;
 	int best_error_index;
 	int total_index;
+	bool is_twiddle_on;
 
   high_resolution_clock::time_point previous;
   bool timeInitialized;
