@@ -24,7 +24,7 @@ PID algorithm implemented consists of three different components: P, I, D.
 
 * I - integral part of the controller - this correction is necessary to compensate possible controller biases (for example: wheels are not straight when steering angle is 0, or as for our project we have a lot more left turns than right turns - this also might be compensated by integral part of the controller in some degree). The idea is simple there - if controller is biased - the average error over time will converge to some non-zero constant for PD controller - so we need to add correction term to compensate this error.  This can be done by adding integral part:   tau_i * SUM(CTE)  
 
-  So finally, for PID-Controller implemented we have: steering angle = -tau_p * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt - tau_i *     SUM(CTE)
+  So finally, for PID-Controller implemented we have: steering angle = -tau_p * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt - tau_i *     SUM(CTE).
   Video 3 demonstrates full PID controller behavior.
 
 ### Parameters tuning
