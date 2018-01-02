@@ -15,7 +15,7 @@ PID algorithm implemented consists of three different components: P, I, D.
   This is main part of the controller. The idea is simple -  we need to set steering angle proportionally to the Cross Track Error - CTE (difference between reference trajectory and current trajectory).  So basically: steering angle = -tau * CTE. This will force car to set steering angle to reduce CTE which mean to move closer to the reference trajectory.
   The problem with having only P component is that it tends to overshoot the real trajectory and never converge to it.  This can be easily seen assuming CTE = 0 and according to the formula above wheels are set to straight position (steering angle = 0). However, car is set slightly towards trajectory forcing to cross it and return bouncing around.  
   
-  Video: https://github.com/alexeysas/sdc-lines-detector/blob/master/test_videos_output/solidWhiteRight.mp4 demonstrates this behavior.
+  Video: https://github.com/alexeysas/sdc-pid-control/blob/master/video/P.mp4 demonstrates this behavior.
 
   So, for P-Controller we have:  steering angle = -tau * CTE
 
@@ -23,13 +23,13 @@ PID algorithm implemented consists of three different components: P, I, D.
 
   So, for PD-Controller we have:  steering angle = -tau * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt
   
-  Video 2 demonstrates PD controller behavior.
+  Video: https://github.com/alexeysas/sdc-pid-control/blob/master/video/PD.mp4 demonstrates PD controller improvement.
 
 * I - integral part of the controller - this correction is necessary to compensate possible controller biases (for example: wheels are not straight when steering angle is 0, or as for our project we have a lot more left turns than right turns - this also might be compensated by integral part of the controller in some degree). The idea is simple there - if controller is biased - the average error over time will converge to some non-zero constant for PD controller - so we need to add correction term to compensate this error.  This can be done by adding integral part:   tau_i * SUM(CTE)  
 
   So finally, for PID-Controller implemented we have: steering angle = -tau_p * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt - tau_i *     SUM(CTE).
   
-  Video 3 demonstrates full PID controller behavior.
+  Video: https://github.com/alexeysas/sdc-pid-control/blob/master/video/PD.mp4 demonstrates full PID controller behavior.
 
 ### Parameters tuning
 
