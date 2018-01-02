@@ -20,6 +20,7 @@ PID algorithm implemented consists of three different components: P, I, D.
 * D - differential part of the controller - introduced to fix the bouncing problem above.  The idea is that we need to compensate the steering angle when it is close to the reference trajectory by adding previous error change:  -tau_d * (CTE - CTE_PREVIOUS) / dt. So, for example for the positive CTE sequence which is heading towards 0 we will have negative component CTE - CTE_PREVIOUS – which works as correction preventing crossing  reference trajectory  and heavily bouncing around.
 
   So, for PD-Controller we have:  steering angle = -tau * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt
+  
   Video 2 demonstrates PD controller behavior.
 
 * I - integral part of the controller - this correction is necessary to compensate possible controller biases (for example: wheels are not straight when steering angle is 0, or as for our project we have a lot more left turns than right turns - this also might be compensated by integral part of the controller in some degree). The idea is simple there - if controller is biased - the average error over time will converge to some non-zero constant for PD controller - so we need to add correction term to compensate this error.  This can be done by adding integral part:   tau_i * SUM(CTE)  
