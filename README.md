@@ -15,7 +15,7 @@ PID algorithm implemented consists of three different components: P, I, D.
   This is main part of the controller. The idea is simple -  we need to set steering angle proportionally to the Cross Track Error - CTE (difference between reference trajectory and current trajectory).  So basically: steering angle = -tau * CTE. This will force car to set steering angle to reduce CTE which mean to move closer to the reference trajectory.
   The problem with having only P component is that it tends to overshoot the real trajectory and never converge to it.  This can be easily seen assuming CTE = 0 and according to the formula above wheels are set to straight position (steering angle = 0). However, car is set slightly towards trajectory forcing to cross it and return bouncing around.  
   
-  Video 1 demonstrates this behavior.
+  Video: https://github.com/alexeysas/sdc-lines-detector/blob/master/test_videos_output/solidWhiteRight.mp4 demonstrates this behavior.
 
   So, for P-Controller we have:  steering angle = -tau * CTE
 
