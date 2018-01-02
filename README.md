@@ -40,6 +40,7 @@ For the final parameters, I've used combined approach - both manual tuning + twi
 * Run simulator to see if there is strong parameter decreasing or increasing trend.
 * Change parameter manually following trend identified.
 
-The final parameters are following: tau_p = 0.12, tau_d = 0.025,  tau_i = 0.0001
+The final parameters are following: tau_p = 0.12, tau_d = 0.25,  tau_i = 0.00001
 
+Additionally, speed controller was implemented to make constant speed = 30mhp - this makes control a lot more stable.
 
