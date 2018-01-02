@@ -29,7 +29,7 @@ PID algorithm implemented consists of three different components: P, I, D.
 
   So finally, for PID-Controller implemented we have: steering angle = -tau_p * CTE - tau_d * (CTE - CTE_PREVIOUS) / dt - tau_i *     SUM(CTE).
   
-  Video: https://github.com/alexeysas/sdc-pid-control/blob/master/video/PD.mp4 demonstrates full PID controller behavior.
+  Video: https://github.com/alexeysas/sdc-pid-control/blob/master/video/PID.mp4 demonstrates full PID controller behavior.
 
 ### Parameters tuning
 
