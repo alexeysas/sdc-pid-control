@@ -117,7 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\main_win.cpp" />
     <ClCompile Include="..\..\src\PID.cpp" />
   </ItemGroup>
   <ItemGroup>

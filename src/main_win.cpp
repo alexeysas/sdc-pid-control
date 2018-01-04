@@ -36,9 +36,10 @@ int main()
   PID spid;
   pid.Init(0.12, 0.25, 0.00001);
   spid.Init(1, 0.1, 0);
+
   // TODO: Initialize the pid variable.
 
-  h.onMessage([&pid, &spid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
+  h.onMessage([&pid,&spid](uWS::WebSocket<uWS::SERVER>* ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
@@ -53,26 +54,25 @@ int main()
           double cte = std::stod(j[1]["cte"].get<std::string>());
           double speed = std::stod(j[1]["speed"].get<std::string>());
           double angle = std::stod(j[1]["steering_angle"].get<std::string>());
-          double steer_value;
           /*
           * TODO: Calcuate steering value here, remember the steering value is
           * [-1, 1].
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-          
+		  
 		  // steer angle
 		  pid.UpdateError(cte);
 		  double steer_value = -pid.TotalError();
-
+		  
 		  // normalize
 		  steer_value = tanh(steer_value);
-
+		 
 		  // constant speed makes control more stable - so need cruise control :)
 		  double speed_cte = speed - 30;
 		  spid.UpdateError(speed_cte);
 		  double throttle = -spid.TotalError();
-
+			
 		  // normalize and avoid breaking
 		  throttle = tanh(throttle) * 0.5;
 		  if (throttle < 0) {
@@ -83,13 +83,13 @@ int main()
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = throttle;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
-          ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+          //std::cout << msg << std::endl;
+          ws->send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }
       } else {
         // Manual driving
         std::string msg = "42[\"manual\",{}]";
-        ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+        ws->send(msg.data(), msg.length(), uWS::OpCode::TEXT);
       }
     }
   });
@@ -109,17 +109,18 @@ int main()
     }
   });
 
-  h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
+  h.onConnection([&h](uWS::WebSocket<uWS::SERVER>* ws, uWS::HttpRequest req) {
     std::cout << "Connected!!!" << std::endl;
   });
 
-  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, char *message, size_t length) {
-    ws.close();
+  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER>* ws, int code, char *message, size_t length) {
+    ws->close();
     std::cout << "Disconnected" << std::endl;
   });
 
   int port = 4567;
-  if (h.listen(port))
+  auto host = "127.0.0.1";
+  if (h.listen(host, port))
   {
     std::cout << "Listening to port " << port << std::endl;
   }
