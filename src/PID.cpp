@@ -78,6 +78,7 @@ void PID::UpdateError(double cte) {
 		cout << "Current Error: " << current_error << " Best Error: " << best_err << endl;
 	}
 
+	std::cout << delta << std::endl;
 	// calculate proportianal, diferential and integral errors
 	//d_error = (cte - p_error) / delta;
 	
