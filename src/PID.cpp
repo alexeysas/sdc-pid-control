@@ -80,9 +80,7 @@ void PID::UpdateError(double cte) {
 
 	std::cout << delta << std::endl;
 	// calculate proportianal, diferential and integral errors
-	//d_error = (cte - p_error) / delta;
-	
-	d_error = (cte - p_error);
+	d_error = (cte - p_error) / delta;
 	p_error = cte;
 	i_error += cte;
 		
