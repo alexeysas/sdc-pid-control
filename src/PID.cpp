@@ -79,7 +79,9 @@ void PID::UpdateError(double cte) {
 	}
 
 	// calculate proportianal, diferential and integral errors
-	d_error = (cte - p_error) / delta;
+	//d_error = (cte - p_error) / delta;
+	
+	d_error = (cte - p_error);
 	p_error = cte;
 	i_error += cte;
 		
