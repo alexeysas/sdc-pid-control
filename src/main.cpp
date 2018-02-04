@@ -34,8 +34,7 @@ int main()
 
   PID pid;
   PID spid;
-  //pid.Init(0.12, 0.25, 0.00001);
-  pid.Init(0.12, 1, 0.00001);
+  pid.Init(0.12, 0.25, 0.00001);
   spid.Init(1, 0.1, 0);
   // TODO: Initialize the pid variable.
 
@@ -53,7 +52,7 @@ int main()
           // j[1] is the data JSON object
           double cte = std::stod(j[1]["cte"].get<std::string>());
           double speed = std::stod(j[1]["speed"].get<std::string>());
-          double angle = std::stod(j[1]["steering_angle"].get<std::string>());
+          //double angle = std::stod(j[1]["steering_angle"].get<std::string>());
     
           /*
           * TODO: Calcuate steering value here, remember the steering value is
